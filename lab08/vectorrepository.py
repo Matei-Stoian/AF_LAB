@@ -91,7 +91,7 @@ class VectorRepository:
             if vector.get_name_id() == check_name_id:
                 self.update_vector_by_index(self.__vectors.index(vector), **kwargs)
                 return
-        raise ValueError(f"No vector found with name_id {name_id}.")
+        raise ValueError(f"No vector found with name_id {check_name_id}.")
 
     def delete_vector_by_index(self, index: int):
         """
@@ -107,7 +107,7 @@ class VectorRepository:
             raise IndexError("Index out of range.")
         self.__vectors.pop(index)
 
-    def delete_vector_by_name_id(self, name_id: str | int):
+    def delete_vector_by_name_id(self, check_name_id: str | int):
         """
         Deletes a vector by its name ID.
 
@@ -117,12 +117,11 @@ class VectorRepository:
         Raises:
             ValueError: If no vector with the specified name ID is found.
         """
-        poz = 0
         for i,vector in enumerate(self.__vectors):
-            if vector.get_name_id() == name_id:
-                poz = i
-                break
-        self.delete_vector_by_index(poz)
+            if vector.get_name_id() == check_name_id:
+                self.delete_vector_by_index(i)
+                return
+        raise ValueError(f"No vector found with name_id {check_name_id}.")
 
     def plot__vectors(self):
         """
@@ -174,7 +173,7 @@ class VectorRepository:
 
         for vector in self.__vectors:
             if vector.get_type() == vector_type:
-                vector.set_color(color)
+                self.update_vector_by_name_id(vector.get_name_id(),color=color)
 
 
 if __name__ == "__main__":

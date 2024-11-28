@@ -24,7 +24,7 @@ class MyVector:
             if isinstance(value, int) == False:
                 raise ValueError("All the values must be of type int.")
 
-        self.__values = np.array(values, dtype=np.int32)
+        self.__values = np.array(values)
 
     def get_name_id(self) -> str | int:
         return self.__name_id
