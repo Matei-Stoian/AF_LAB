@@ -3,7 +3,6 @@ from math import sqrt
 import matplotlib.pyplot as plt
 import matplotlib
 
-matplotlib.use("TkAgg")
 
 
 class PointRepository:
