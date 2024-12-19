@@ -56,7 +56,7 @@ class TestVectorRepository(unittest.TestCase):
         """
         Test the `update_vector_by_name_id` method.
         """
-        self.repo.update_vector_by_name_id(check_name_id="updated_id",name_id=1,color="m")
+        self.repo.update_vector_by_name_id(check_name_id=1,name_id="updated_id",color="m")
         updated_vector = self.repo.get_vector_by_index(0)
         self.assertEqual(updated_vector.get_name_id(), "updated_id")
         self.assertEqual(updated_vector.get_color(), "m")

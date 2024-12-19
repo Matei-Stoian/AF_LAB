@@ -91,7 +91,7 @@ class VectorRepository:
             if vector.get_name_id() == check_name_id:
                 self.update_vector_by_index(self.__vectors.index(vector), **kwargs)
                 return
-        raise ValueError(f"No vector found with name_id {name_id}.")
+        raise ValueError(f"No vector found with name_id {check_name_id}.")
 
     def delete_vector_by_index(self, index: int):
         """
@@ -172,9 +172,9 @@ class VectorRepository:
         if not isinstance(vector_type, int) or vector_type < 1:
             raise ValueError("Type must be an integer greater than or equal to 1.")
 
-        for vector in self.__vectors:
-            if vector.get_type() == vector_type:
-                vector.set_color(color)
+        for i in range(len(self.__vectors)):
+            if self.__vectors[i].get_type() == vector_type:
+                self.__vectors[i].set_color(color=color)
 
 
 if __name__ == "__main__":
