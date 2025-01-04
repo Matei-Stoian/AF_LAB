@@ -15,7 +15,7 @@ def clear_screen():
 
 
 def airport_menu():
-    menu_list = ["1. Create a new pane.",
+    menu_list = ["1. Create a new plane.",
                  "2. Display all the planes.",
                  "3. Update a plane.",
                  "4. Delete a plane.",
