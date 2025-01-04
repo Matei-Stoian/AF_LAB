@@ -17,7 +17,14 @@ class PlaneRepository:
         """
         self.__planes = plane_list if plane_list is not None else []
 
-    def create_plane(self, plane_id: str | int, company_name: str, seat_number: int, destination: str, passengers_list: list):
+    def create_plane(
+        self,
+        plane_id: str | int,
+        company_name: str,
+        seat_number: int,
+        destination: str,
+        passengers_list: list,
+    ):
         """
         Create a new plane and add it to the repository.
 
@@ -37,11 +44,19 @@ class PlaneRepository:
         for existing in self.__planes:
             if existing.get_id() == plane_id:
                 raise ValueError(f"Plane with ID {plane_id} already exists.")
-        new_plane = Plane(plane_id, company_name, seat_number, destination, passengers_list)
+        new_plane = Plane(
+            plane_id, company_name, seat_number, destination, passengers_list
+        )
         self.__planes.append(new_plane)
 
-    def update_plane(self, plane_id: str | int, company_name: str | None = None, seat_number: int | None = None,
-                     destination: str | None = None, passengers_list: list | None = None):
+    def update_plane(
+        self,
+        plane_id: str | int,
+        company_name: str | None = None,
+        seat_number: int | None = None,
+        destination: str | None = None,
+        passengers_list: list | None = None,
+    ):
         """
         Update an existing plane's details.
 

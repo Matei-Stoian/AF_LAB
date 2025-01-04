@@ -101,3 +101,6 @@ class Passager:
             int: The passport number of the passenger.
         """
         return self.__passport_number
+
+    def __repr__(self):
+        return f"Passager(first_name='{self.__first_name}', last_name='{self.__last_name}', passport_number={self.__passport_number})"

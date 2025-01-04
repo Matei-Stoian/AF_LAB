@@ -156,3 +156,80 @@ class PlaneController:
             result[destination].append(k_goups)
         
         return result
+
+    def create_plane(self, plane: Plane):
+        """
+        Create a new plane and add it to the repository.
+
+        Args:
+            plane (Plane): The plane to add.
+
+        Returns:
+            None
+
+        Raises:
+            ValueError: If a plane with the same ID already exists.
+        """
+        self.__repo.create_plane(plane.get_id(), plane.get_company_name(), plane.get_seat_number(), plane.get_destination(), plane.get_passager_list())
+
+    def update_plane(self, plane_id: str | int, company_name: str | None = None, seat_number: int | None = None,
+                     destination: str | None = None, passengers_list: list | None = None):
+        """
+        Update an existing plane's details.
+
+        Args:
+            plane_id (str | int): The ID of the plane to update.
+            company_name (str, optional): The new company name.
+            seat_number (int, optional): The new seat number.
+            destination (str, optional): The new destination.
+            passengers_list (list, optional): The new list of passengers.
+
+        Returns:
+            None
+
+        Raises:
+            ValueError: If no plane with the given ID is found.
+        """
+        self.__repo.update_plane(plane_id, company_name, seat_number, destination, passengers_list)
+
+    def get_all_planes(self) -> list[Plane]:
+        """
+        Retrieve all planes in the repository.
+
+        Returns:
+            list[Plane]: A list of all planes.
+
+        Raises:
+            None
+        """
+        return self.__repo.get_all_planes()
+
+    def get_plane(self, plane_id: str | int) -> Plane:
+        """
+        Retrieve a plane by its ID.
+
+        Args:
+            plane_id (str | int): The ID of the plane to retrieve.
+
+        Returns:
+            Plane: The plane with the specified ID.
+
+        Raises:
+            ValueError: If no plane is found with the specified ID.
+        """
+        return self.__repo.get_plane(plane_id)
+
+    def delete_plane(self, plane_id: str | int):
+        """
+        Delete a plane by its ID.
+
+        Args:
+            plane_id (str | int): The ID of the plane to delete.
+
+        Returns:
+            None
+
+        Raises:
+            ValueError: If no plane is found with the specified ID.
+        """
+        self.__repo.delete_plane(plane_id)

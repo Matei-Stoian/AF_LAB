@@ -187,3 +187,9 @@ class Plane:
                 )
         self.__passagers_list = PassagerRepository(passager_list)
 
+    def __repr__(self):
+        return (f"Plane(id={self.__id}, company_name='{self.__company_name}', "
+                f"seat_number={self.__seat_number}, destination='{self.__destination}', "
+                f"passengers={self.__passagers_list.get_all()})")
+
+

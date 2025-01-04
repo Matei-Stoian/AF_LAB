@@ -19,16 +19,30 @@ class TestPassagerController(unittest.TestCase):
         self.assertEqual(sorted_passagers[1].get_last_name(), "Doe")
         self.assertEqual(sorted_passagers[2].get_last_name(), "Smith")
 
-    def test_identify_passagers_first_name(self):
-        similar_passagers = self.controller.identify_passagers_first_name()
-        self.assertEqual(len(similar_passagers), 0)
+    def test_filter_by_first_last_name(self):
+        filtered_passagers = self.controller.filter_by_first_last_name("John")
+        self.assertEqual(len(filtered_passagers), 1)
+        self.assertEqual(filtered_passagers[0].get_first_name(), "John")
 
-        passager4 = Passager("Jack", "Brown", 101)
-        self.repo.create_passager(passager4)
-        similar_passagers = self.controller.identify_passagers_first_name()
-        self.assertEqual(len(similar_passagers), 2)
-        self.assertEqual(similar_passagers[0].get_first_name(), "Jake")
-        self.assertEqual(similar_passagers[1].get_first_name(), "Jack")
+    def test_create_passager(self):
+        new_passager = Passager("Jack", "Brown", 101)
+        self.controller.create_passager(new_passager)
+        passager = self.controller.get_passager(101)
+        self.assertEqual(passager.get_first_name(), "Jack")
+        self.assertEqual(passager.get_last_name(), "Brown")
+        self.assertEqual(passager.get_passport_number(), 101)
+
+    def test_update_passager(self):
+        self.controller.update_passager(passport_number=123, first_name="Johnny")
+        passager = self.controller.get_passager(123)
+        self.assertEqual(passager.get_first_name(), "Johnny")
+
+    def test_delete_passager(self):
+        self.controller.delete_passager(123)
+        with self.assertRaises(ValueError):
+            self.controller.get_passager(123)
+
+  
 
 if __name__ == '__main__':
     unittest.main()

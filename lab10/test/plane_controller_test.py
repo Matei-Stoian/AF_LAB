@@ -62,5 +62,26 @@ class TestPlaneController(unittest.TestCase):
         self.assertEqual(len(groups["DestinationA"]), 1)  # One list of groups for DestinationA
         self.assertTrue(isinstance(groups["DestinationA"][0], list))  # Contains a list of groups
 
+    def test_create_plane(self):
+        new_plane = Plane("4", "CompanyD", 250, "DestinationC", [self.passager1])
+        self.controller.create_plane(new_plane)
+        plane = self.controller.get_plane("4")
+        self.assertEqual(plane.get_id(), "4")
+        self.assertEqual(plane.get_company_name(), "CompanyD")
+        self.assertEqual(plane.get_seat_number(), 250)
+        self.assertEqual(plane.get_destination(), "DestinationC")
+        self.assertEqual(len(plane.get_passager_list()), 1)
+
+    def test_update_plane(self):
+        self.controller.update_plane("1", company_name="NewCompanyA", seat_number=120)
+        plane = self.controller.get_plane("1")
+        self.assertEqual(plane.get_company_name(), "NewCompanyA")
+        self.assertEqual(plane.get_seat_number(), 120)
+
+    def test_delete_plane(self):
+        self.controller.delete_plane("1")
+        with self.assertRaises(ValueError):
+            self.controller.get_plane("1")
+
 if __name__ == '__main__':
     unittest.main()
